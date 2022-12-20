@@ -29,6 +29,7 @@ import org.openmetadata.schema.api.configuration.events.EventHandlerConfiguratio
 import org.openmetadata.schema.api.fernet.FernetConfiguration;
 import org.openmetadata.schema.api.security.AuthenticationConfiguration;
 import org.openmetadata.schema.api.security.AuthorizerConfiguration;
+import org.openmetadata.schema.api.security.CorsConfiguration;
 import org.openmetadata.schema.api.security.jwt.JWTTokenConfiguration;
 import org.openmetadata.schema.api.slackChat.SlackChatConfiguration;
 import org.openmetadata.schema.email.SmtpSettings;
@@ -49,6 +50,9 @@ public class OpenMetadataApplicationConfig extends Configuration {
 
   @JsonProperty("authorizerConfiguration")
   private AuthorizerConfiguration authorizerConfiguration;
+
+  @JsonProperty("corsConfiguration")
+  private CorsConfiguration corsConfiguration;
 
   @JsonProperty("authenticationConfiguration")
   private AuthenticationConfiguration authenticationConfiguration;
