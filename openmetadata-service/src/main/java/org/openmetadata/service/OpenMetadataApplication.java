@@ -108,7 +108,7 @@ public class OpenMetadataApplication extends Application<OpenMetadataApplication
       throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException,
           InvocationTargetException, IOException, ConfigurationException {
 
-    if (catalogConfig.getCorsConfiguration().getEnableFlag()) {
+    if (catalogConfig.getCorsConfiguration() != null && catalogConfig.getCorsConfiguration().getEnabled()) {
       configureCors(catalogConfig, environment);
     }
     // init email Util for handling
@@ -192,7 +192,6 @@ public class OpenMetadataApplication extends Application<OpenMetadataApplication
     cors.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, corsConfiguration.getAllowedHeaders());
     cors.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, corsConfiguration.getAllowedMethods());
     cors.setInitParameter(CrossOriginFilter.ALLOW_CREDENTIALS_PARAM, corsConfiguration.getAllowCredentials());
-    // Add URL mapping
   }
 
   private Jdbi createAndSetupJDBI(Environment environment, DataSourceFactory dbFactory) {

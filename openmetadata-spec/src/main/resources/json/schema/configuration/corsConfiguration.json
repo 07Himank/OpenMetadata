@@ -1,22 +1,21 @@
 {
   "$id": "https://open-metadata.org/schema/entity/configuration/corsConfiguration.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "AuthorizerConfiguration",
+  "title": "CorsConfiguration",
   "description": "This schema defines the Cors Configuration.",
   "type": "object",
   "javaType": "org.openmetadata.schema.api.security.CorsConfiguration",
   "properties": {
-    "enabledFlag": {
+    "enabled": {
       "description": "this configuration is optional , so to enable cors configuration set true and false for disable",
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     },
     "allowedOrigins": {
-      "description": "Origins allowed to access the url.",
+      "description": "Origins allowed to access the URL.",
       "type": "string"
     },
     "accessControlAllowOrigin": {
-      "description": "specify domains to access the api.",
+      "description": "specify domains to access the API.",
       "type": "string"
     },
     "chainPreflight": {
@@ -28,7 +27,7 @@
       "type": "string"
     },
     "allowedMethods": {
-      "description": "specify which http methods are allowed",
+      "description": "specify which HTTP methods are allowed",
       "type": "string"
     },
     "allowCredentials": {
@@ -36,7 +35,7 @@
       "type": "string"
     },
     "urlPatterns": {
-      "description": "mapping for url patters",
+      "description": "mapping for URL patters",
       "type": "string"
     }
   }

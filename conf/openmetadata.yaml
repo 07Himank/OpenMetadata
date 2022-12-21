@@ -142,7 +142,7 @@ authorizerConfiguration:
   enableSecureSocketConnection : ${AUTHORIZER_ENABLE_SECURE_SOCKET:-false}
 
 corsConfiguration:
-  enabledFlag: ${CORS_ENABLED_FLAG :- false}
+  enabled: ${CORS_ENABLED_FLAG :- false}
   allowedOrigins: ${CORS_ALLOWED_ORIGINS :- "*"}
   accessControlAllowOrigin: ${CORS_ACCESS_CONTROL_ALLOW_ORIGIN :- "*"}
   chainPreflight: ${CORS_CHAIN_PREFLIGHT :- false}
