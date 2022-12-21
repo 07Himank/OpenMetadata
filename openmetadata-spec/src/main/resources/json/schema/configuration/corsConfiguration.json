@@ -38,5 +38,6 @@
       "description": "mapping for URL patters",
       "type": "string"
     }
-  }
+  },
+  "additionalProperties": false
 }
