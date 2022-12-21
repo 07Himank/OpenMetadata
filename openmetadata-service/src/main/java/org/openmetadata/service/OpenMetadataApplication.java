@@ -26,7 +26,6 @@ import io.dropwizard.jersey.errors.LoggingExceptionMapper;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import io.dropwizard.lifecycle.Managed;
 import io.dropwizard.server.DefaultServerFactory;
-import io.dropwizard.servlets.CacheBustingFilter;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
@@ -178,16 +177,15 @@ public class OpenMetadataApplication extends Application<OpenMetadataApplication
     initializeWebsockets(catalogConfig, environment);
   }
 
-
-  private void configureCors(OpenMetadataApplicationConfig catalogConfig,Environment environment) {
-    final FilterRegistration.Dynamic cors =
-        environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+  private void configureCors(OpenMetadataApplicationConfig catalogConfig, Environment environment) {
+    final FilterRegistration.Dynamic cors = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
     CorsConfiguration corsConfiguration = catalogConfig.getCorsConfiguration();
     // Configure CORS parameters
     cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, corsConfiguration.getUrlPatterns());
 
     cors.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, corsConfiguration.getAllowedOrigins());
-    cors.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, corsConfiguration.getAccessControlAllowOrigin());
+    cors.setInitParameter(
+        CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, corsConfiguration.getAccessControlAllowOrigin());
     cors.setInitParameter(CrossOriginFilter.CHAIN_PREFLIGHT_PARAM, corsConfiguration.getChainPreflight().toString());
     cors.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, corsConfiguration.getAllowedHeaders());
     cors.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, corsConfiguration.getAllowedMethods());
