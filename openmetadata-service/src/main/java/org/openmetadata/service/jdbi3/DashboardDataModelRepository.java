@@ -14,6 +14,7 @@
 package org.openmetadata.service.jdbi3;
 
 import static org.openmetadata.common.utils.CommonUtil.listOrEmpty;
+import static org.openmetadata.common.utils.CommonUtil.nullOrEmpty;
 import static org.openmetadata.service.Entity.FIELD_FOLLOWERS;
 import static org.openmetadata.service.Entity.FIELD_TAGS;
 
@@ -67,7 +68,30 @@ public class DashboardDataModelRepository extends EntityRepository<DashboardData
   public void prepare(DashboardDataModel dashboardDataModel) throws IOException {
     DashboardService dashboardService = Entity.getEntity(dashboardDataModel.getService(), "", Include.ALL);
     dashboardDataModel.setService(dashboardService.getEntityReference());
-    dashboardDataModel.setServiceType(dashboardService.getServiceType());
+    addDerivedColumnTags(dashboardDataModel.getColumns());
+    validateColumnTags(dashboardDataModel.getColumns());
+  }
+
+  private void addDerivedColumnTags(List<Column> columns) {
+    if (nullOrEmpty(columns)) {
+      return;
+    }
+
+    for (Column column : columns) {
+      column.setTags(addDerivedTags(column.getTags()));
+      if (column.getChildren() != null) {
+        addDerivedColumnTags(column.getChildren());
+      }
+    }
+  }
+
+  private void validateColumnTags(List<Column> columns) {
+    for (Column column : columns) {
+      checkMutuallyExclusive(column.getTags());
+      if (column.getChildren() != null) {
+        validateColumnTags(column.getChildren());
+      }
+    }
   }
 
   @Override

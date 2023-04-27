@@ -111,6 +111,8 @@ public class MlModelRepository extends EntityRepository<MlModel> {
   /** Make sure that all the MlFeatureSources are pointing to correct EntityReferences in tha Table DAO. */
   private void validateReferences(List<MlFeature> mlFeatures) throws IOException {
     for (MlFeature feature : mlFeatures) {
+      feature.setTags(addDerivedTags(feature.getTags()));
+      checkMutuallyExclusive(feature.getTags());
       if (!nullOrEmpty(feature.getFeatureSources())) {
         for (MlFeatureSource source : feature.getFeatureSources()) {
           validateMlDataSource(source);
