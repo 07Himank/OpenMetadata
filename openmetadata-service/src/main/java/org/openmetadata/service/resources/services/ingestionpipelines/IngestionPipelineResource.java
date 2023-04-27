@@ -216,7 +216,7 @@ public class IngestionPipelineResource extends EntityResource<IngestionPipeline,
           String pipelineType,
       @Parameter(
               description = "Filter airflow pipelines by service Type",
-              schema = @Schema(type = "string", example = "elasticSearchReindex"))
+              schema = @Schema(type = "string", example = "messagingService"))
           @QueryParam("serviceType")
           String serviceType,
       @Parameter(description = "Limit the number ingestion returned. (1 to 1000000, " + "default = 10)")
@@ -300,11 +300,6 @@ public class IngestionPipelineResource extends EntityResource<IngestionPipeline,
               schema = @Schema(type = "string", example = FIELDS))
           @QueryParam("fields")
           String fieldsParam,
-      @Parameter(
-              description = "Filter airflow pipelines by service Id",
-              schema = @Schema(type = "string", example = "messagingService"))
-          @QueryParam("serviceId")
-          String serviceId,
       @Parameter(
               description = "Include all, deleted, or non-deleted entities.",
               schema = @Schema(implementation = Include.class))
