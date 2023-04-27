@@ -68,6 +68,7 @@ public class DashboardDataModelRepository extends EntityRepository<DashboardData
   public void prepare(DashboardDataModel dashboardDataModel) throws IOException {
     DashboardService dashboardService = Entity.getEntity(dashboardDataModel.getService(), "", Include.ALL);
     dashboardDataModel.setService(dashboardService.getEntityReference());
+    dashboardDataModel.setServiceType(dashboardService.getServiceType());
     addDerivedColumnTags(dashboardDataModel.getColumns());
     validateColumnTags(dashboardDataModel.getColumns());
   }
